@@ -38,92 +38,95 @@ window = Tk()
  
 window.title("Dice")
 
-roll_label = Label(window,text='Ready to roll')
-roll_label.grid(column=2,row=1)
+roll_message = Message(window,text='Ready to roll')
+roll_message.grid(column=2,row=1,rowspan=len(rolldict),sticky=N)
 
 def roll_dice():
     usedict = {
-    'd20':d20combo.get(),
-    'd100':d100combo.get(),
-    'd12':d12combo.get(),
-    'd10':d10combo.get(),
-    'd8':d8combo.get(),
-    'd6a':d6acombo.get(),
-    'd6b':d6bcombo.get(),
-    'd4':d4combo.get(),
+    'd20':used20.get(),
+    'd100':used100.get(),
+    'd12':used12.get(),
+    'd10':used10.get(),
+    'd8':used8.get(),
+    'd6a':used6a.get(),
+    'd6b':used6b.get(),
+    'd4':used4.get(),
     }
 
-    for x in usedict.keys():
-        if usedict[x] == 'True': usedict[x]=True
-        if usedict[x] == 'False': usedict[x]=False
+#    for x in usedict.keys():
+#        if usedict[x] == 'True': usedict[x]=True
+#        if usedict[x] == 'False': usedict[x]=False
 
     totalroll = 0
+    message = ''
     for d in rolldict.keys():
-        if bool(usedict[d])==True:
+        if bool(int(usedict[d]))==True:
             rolldict[d] = random.randrange(setdict[d][0],setdict[d][1],setdict[d][2])
             print(d + ' rolls '+ str(rolldict[d]))
+            message = message+(d + ' rolls '+ str(rolldict[d])+'\n')
             totalroll = totalroll + rolldict[d]
 
-    roll_result = ('Total = ' + str(totalroll))
-    roll_label.configure(text = roll_result)
+    roll_result = message+('Total = ' + str(totalroll))
+    roll_message.configure(text = roll_result)
 
 
 
 d20 = Label(window, text='D20')
 d20.grid(column=0,row=0)
-d20combo = Combobox(window)
-d20combo['values'] = (True,False)
-d20combo.grid(column=1,row=0)
-d20combo.current(1)
+used20 =IntVar()
+d20button = Checkbutton(window, variable = used20)
+#d20button['values'] = (True,False)
+d20button.grid(column=1,row=0)
+
 
 d100 = Label(window, text='D100')
 d100.grid(column=0,row=1)
-d100combo = Combobox(window)
-d100combo['values'] = (True,False)
-d100combo.grid(column=1,row=1)
-d100combo.current(1)
+used100 = IntVar()
+d100button = Checkbutton(window, variable = used100)
+#d100button['values'] = (True,False)
+d100button.grid(column=1,row=1)
 
 d12 = Label(window, text='D12')
 d12.grid(column=0,row=2)
-d12combo = Combobox(window)
-d12combo['values'] = (True,False)
-d12combo.grid(column=1,row=2)
-d12combo.current(1)
+used12 = IntVar()
+d12button = Checkbutton(window, variable = used12)
+#d12button['values'] = (True,False)
+d12button.grid(column=1,row=2)
 
 d10 = Label(window, text='D10')
 d10.grid(column=0,row=3)
-d10combo = Combobox(window)
-d10combo['values'] = (True,False)
-d10combo.grid(column=1,row=3)
-d10combo.current(1)
+used10 = IntVar()
+d10button = Checkbutton(window, variable = used10)
+#d10button['values'] = (True,False)
+d10button.grid(column=1,row=3)
 
 d8 = Label(window, text='D8')
 d8.grid(column=0,row=4)
-d8combo = Combobox(window)
-d8combo['values'] = (True,False)
-d8combo.grid(column=1,row=4)
-d8combo.current(1)
+used8 = IntVar()
+d8button = Checkbutton(window, variable = used8)
+#d8button['values'] = (True,False)
+d8button.grid(column=1,row=4)
 
 d6a = Label(window, text='D6a')
 d6a.grid(column=0,row=5)
-d6acombo = Combobox(window)
-d6acombo['values'] = (True,False)
-d6acombo.grid(column=1,row=5)
-d6acombo.current(1)
+used6a = IntVar()
+d6abutton = Checkbutton(window, variable = used6a)
+#d6abutton['values'] = (True,False)
+d6abutton.grid(column=1,row=5)
 
 d6b = Label(window, text='D6b')
 d6b.grid(column=0,row=6)
-d6bcombo = Combobox(window)
-d6bcombo['values'] = (True,False)
-d6bcombo.grid(column=1,row=6)
-d6bcombo.current(1)
+used6b = IntVar()
+d6bbutton = Checkbutton(window, variable = used6b)
+#d6bbutton['values'] = (True,False)
+d6bbutton.grid(column=1,row=6)
 
 d4 = Label(window, text='D4')
 d4.grid(column=0,row=7)
-d4combo = Combobox(window)
-d4combo['values'] = (True,False)
-d4combo.grid(column=1,row=7)
-d4combo.current(1)
+used4 = IntVar()
+d4button = Checkbutton(window, variable = used4)
+#d4button['values'] = (True,False)
+d4button.grid(column=1,row=7)
 
 
 window.geometry('350x200')
